@@ -18,6 +18,7 @@ class ChistesHandler(ContentHandler):
         self.inPregunta = False
         self.respuesta = ""
         self.inRespuesta = False
+        self.variable = []
 
     def startElement(self, name, attrs):
         """
@@ -26,8 +27,8 @@ class ChistesHandler(ContentHandler):
         if name == 'chiste':
             # De esta manera tomamos los valores de los atributos
             self.calificacion = attrs.get('calificacion', "")
+            self.variable.append(self.calificacion)
         elif name == 'pregunta':
-            print("hola")
             self.inPregunta = True
         elif name == 'respuesta':
             self.inRespuesta = True
@@ -37,9 +38,11 @@ class ChistesHandler(ContentHandler):
         Método que se llama al cerrar una etiqueta
         """
         if name == 'pregunta':
+            self.variable.append(self.pregunta)
             self.pregunta = ""
             self.inPregunta = False
         if name == 'respuesta':
+            self.variable.append(self.respuesta)
             self.respuesta = ""
             self.inRespuesta = False
 
@@ -50,13 +53,14 @@ class ChistesHandler(ContentHandler):
         if self.inPregunta:
             self.pregunta = self.pregunta + char
         if self.inRespuesta:
-            self.respuesta += char
+            self.respuesta += char #Equivale a self.pregunta + char
 
 if __name__ == "__main__":
     """
     Programa principal
     """
-    parser = make_parser()
-    cHandler = ChistesHandler()
-    parser.setContentHandler(cHandler)
-    parser.parse(open('chistes2.xml'))
+    parser = make_parser() #Crea el parser (leer linea a linea...)
+    cHandler = ChistesHandler() #Crea el handler (para manejar el xml)
+    parser.setContentHandler(cHandler) #Relaciona el parser con el handler
+    parser.parse(open('chistes2.xml')) #Con el parser abre el documento de chistes
+    print(cHandler.variable)
