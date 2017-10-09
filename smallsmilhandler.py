@@ -14,55 +14,49 @@ class SmallSMILHandler(ContentHandler):
         Constructor. Inicializamos las variables
         """
 
-        self.variable = []
+        self.lista = []
     
     def startElement(self, name, attrs):
         """
         Método que se llama cuando se abre una etiqueta
         """
+        dic = {}
+        
         if name == 'root-layout':
-            
-            #self.width = attrs.get('width', "")
-            #self.height = attrs.get('height', "")
-            #self.background_color = attrs.get('background_color', "")
-            self.variable.append(attrs.get('width', ""))
-            self.variable.append(attrs.get('height', ""))
-            self.variable.append(attrs.get('background_color', ""))
+            dic['name'] = name
+            dic['width'] = attrs.get('width', "")
+            dic['height'] = attrs.get('height', "")
+            dic['background_color'] = attrs.get('background_color', "")
+            self.lista.append(dic)
         elif name == 'region':
-            #self.id = attrs.get('id', "")
-            #self.top = attrs.get('top', "")
-            #self.bottom = attrs.get('bottom', "")
-            #self.left = attrs.get('left', "")
-            #self.right = attrs.get('right', "")
-            self.variable.append(attrs.get('id', ""))
-            self.variable.append(attrs.get('top', ""))
-            self.variable.append(attrs.get('bottom', ""))
-            self.variable.append(attrs.get('left', ""))
-            self.variable.append(attrs.get('right', ""))
+            dic['name'] = name
+            dic ['id'] = attrs.get('id', "")
+            dic ['top'] = attrs.get('top', "")
+            dic ['bottom'] = attrs.get('bottom', "")
+            dic ['left'] = attrs.get('left', "")
+            dic ['right'] = attrs.get('right', "")
+            self.lista.append(dic)
         elif name == 'img':
-            #self.src = attrs.get('src', "")
-            #self.region = attrs.get('region', "")
-            #self.begin = attrs.get('begin', "")
-            #self.dur = attrs.get('dur', "")
-            self.variable.append(attrs.get('src', ""))
-            self.variable.append(attrs.get('region', ""))
-            self.variable.append(attrs.get('begin', ""))
-            self.variable.append(attrs.get('dur', ""))
+            dic['name'] = name
+            dic ['src'] = attrs.get('src', "")
+            dic ['region'] = attrs.get('region', "")
+            dic ['begin'] = attrs.get('begin', "")
+            dic ['dur'] = attrs.get('dur', "")
+            self.lista.append(dic)
         elif name == 'audio':
-            #self.src = attrs.get('src', "")
-            #self.begin = attrs.get('begin', "")
-            #self.dur = attrs.get('dur', "")
-            self.variable.append(attrs.get('src', ""))
-            self.variable.append(attrs.get('begin', ""))
-            self.variable.append(attrs.get('dur', ""))
+            dic['name'] = name
+            dic ['src'] = attrs.get('src', "")
+            dic ['begin'] = attrs.get('begin', "")
+            dic ['dur'] = attrs.get('dur', "")
+            self.lista.append(dic)
         elif name == 'textstream':
-            #self.src = attrs.get('src', "")
-            #self.region = attrs.get('region', "")
-            self.variable.append(attrs.get('src', ""))
-            self.variable.append(attrs.get('region', ""))
+            dic['name'] = name
+            dic['src'] = attrs.get('src', "")
+            dic ['region'] = attrs.get('region', "")
+            self.lista.append(dic)
 
     def get_tags(self):
-        print(self.variable)
+        print(self.lista)
 
 
 if __name__ == "__main__":
