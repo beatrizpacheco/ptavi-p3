@@ -26,7 +26,7 @@ class SmallSMILHandler(ContentHandler):
             self.lista.append(dic)
 
     def get_tags(self):
-        print(self.lista)
+        return(self.lista)
 
 
 if __name__ == "__main__":
@@ -34,4 +34,4 @@ if __name__ == "__main__":
     cHandler = SmallSMILHandler()  # Crea el handler (para manejar el xml)
     parser.setContentHandler(cHandler)  # Relaciona el parser con el handler
     parser.parse(open('karaoke.smil'))
-    cHandler.get_tags()
+    print(cHandler.get_tags())
