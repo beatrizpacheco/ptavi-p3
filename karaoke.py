@@ -6,6 +6,7 @@ import json
 from xml.sax import make_parser
 from xml.sax.handler import ContentHandler
 from smallsmilhandler import SmallSMILHandler
+from urllib.request import urlretrieve
 
 
 if __name__ == "__main__":
@@ -20,10 +21,12 @@ if __name__ == "__main__":
     parser.parse(open(sys.argv[1]))
     lista = cHandler.get_tags()
 
-#Escribe
+#Escribe y descarga lo remoto
     for etiqueta in lista:
         nombre = etiqueta['name']
         for atributo in etiqueta:
+            if etiqueta[atributo][0:7] == "http://":
+                urlretrieve(etiqueta[atributo], etiqueta[atributo].split("/")[-1])
             if etiqueta[atributo] != "" and atributo != 'name':
                 nombre += '\t' + atributo + '="' + etiqueta[atributo] + '"'
         print(nombre)
