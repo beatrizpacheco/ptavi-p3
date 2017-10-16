@@ -48,7 +48,6 @@ if __name__ == "__main__":
         objeto = KaraokeLocal(sys.argv[1])
     except (ValueError, IndexError, FileNotFoundError):
         sys.exit("Usage: python3 karaoke.py file.smil")
-    
     print(objeto)
     objeto.to_json(sys.argv[1])
     objeto.do_local()
