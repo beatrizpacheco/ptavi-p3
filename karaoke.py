@@ -44,9 +44,11 @@ class KaraokeLocal(SmallSMILHandler):
 
 if __name__ == "__main__":
 
-    if len(sys.argv) != 2:
+    try:
+        objeto = KaraokeLocal(sys.argv[1])
+    except (ValueError, IndexError, FileNotFoundError):
         sys.exit("Usage: python3 karaoke.py file.smil")
-    objeto = KaraokeLocal(sys.argv[1])
+    
     print(objeto)
     objeto.to_json(sys.argv[1])
     objeto.do_local()
